@@ -25,5 +25,5 @@ def add_sighting(request):
             'form': form,
     }
 
-    return render(request, 'sightings/edit.html', context)
+    return render(request, 'sightings/add.html', context)
 # Create your views here.
