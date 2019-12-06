@@ -2,3 +2,4 @@
 __pycache__
 collected-static
 *.sqlite3
+env
