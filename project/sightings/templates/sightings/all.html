@@ -1,5 +1,18 @@
-<ul>
-	{% for sighting in sightings %}
-		<li>{{ sighting.id }}</li>
-	{% endfor %}
-</ul>
+<!doctype html>
+<html>
+  <body>
+	  <form>
+		  <div>
+		  	<a href="/sightings/add/"><button type="add" value="Add">Add</button></a>
+		  	<a href="/sightings/stats/"><button type="stats" value="Stats">Satats</button></a>
+		  	<a href="/map/"><button type="map" value="Map">Map</button></a>
+		  </div>
+	  </form>
+	  <ul>
+		  {% for sighting in sightings %}
+		  <li>{{ sighting.id }}</li>
+		  {% endfor %}
+	  </ul>
+  </body>
+</html>
+
