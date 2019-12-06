@@ -13,13 +13,13 @@ def all_sightings(request):
 
 
 def add_sighting(request):
-    if request.method == 'POST'
-        form = PetForm(request.POST)
+    if request.method == 'POST':
+        form = SightingForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect(f'/sightings/list/')
     else:
-        form = PetForm()
+        form = SightingForm()
 
     context = {
             'form': form,
