@@ -41,3 +41,18 @@ def edit_sighting(request, unique_id):
         return redirect('all_sightings')
     return render(request, 'squirreltracker/edit.html', {'form':form,})
 
+def sightingsStats(request):
+    agelist = Sighting.objects.values('age').annotate(count=Count('age')).orber_by()
+    colorlist = Sighting.objects.values('color').annotate(count=Count('color')).order_by()
+    datelist = Sighting.objects.values('date').annotate(count=Count('date')).order_by()
+    runninglist = Sighting.objects.values('running').annotate(count=Count('running')).order_by()
+    chasinglist = Sighting.objects.values('chasing').annotate(count=Count('chasing')).order_by()
+    context={
+            'agelist':agelist,
+            'shiftlist':shiftlist,
+            'runninglist':runninglist,
+            'chasinglist':chasinglist,
+            }
+    return render(request, 'stats.html',context)
+
+
