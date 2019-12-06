@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-
+from django.db.models import Count
 from .models import Sighting
 from .forms import SightingForm
 
@@ -26,4 +26,18 @@ def add_sighting(request):
     }
 
     return render(request, 'sightings/add.html', context)
-# Create your views here.
+
+def edit_sighting(request, unique_id):
+    sighting = get_object_or_404(Sighting, pk.unique_id)
+    form = SightingForm(request,POST or None, instance=sighting)
+    if 'Update' in repost.POST:
+        if form.is_valid():
+            form.save()
+            return redirect('all_sightings')
+    elif 'Delete' in request.POST:
+        sighting.delete()
+        return redirect('all_sightings')
+    elif 'Cancel' in request.POST:
+        return redirect('all_sightings')
+    return render(request, 'squirreltracker/edit.html', {'form':form,})
+
