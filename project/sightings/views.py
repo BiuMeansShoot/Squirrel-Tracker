@@ -70,6 +70,6 @@ def sightingsStats(request):
             'runninglist':runninglist,
             'chasinglist':chasinglist,
             }
-    return render(request, 'stats.html',context)
+    return render(request, 'sightings/stats.html',context)
 
 
