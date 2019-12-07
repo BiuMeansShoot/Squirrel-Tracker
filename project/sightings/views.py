@@ -5,7 +5,7 @@ from .models import Sighting
 from .forms import SightingForm
 
 def squirrels_map(request):
-    sightings = Sightings.object.all()[:100]
+    sightings = Sighting.objects.all()[:100]
     context = {'sightings': sightings,}
     return render(request, 'sightings/map.html',context)
 
@@ -40,7 +40,7 @@ def edit_sighting(request, unique_id):
         form = SightingForm(request.POST, instance=sighting)
         if form.is_valid():
             form.save()
-            return redirect(f'/sightings/{unique_id}')
+            return redirect(f'/sightings/')
     else:
         form = SightingForm(instance=sighting)
 
