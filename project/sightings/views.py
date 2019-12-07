@@ -19,7 +19,7 @@ def add_sighting(request):
         form = SightingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(f'/sightings/')
+            return redirect(f'/sightings')
     else:
         form = SightingForm()
 
