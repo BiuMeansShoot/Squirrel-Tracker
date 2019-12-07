@@ -5,7 +5,7 @@ from .models import Sighting
 from .forms import SightingForm
 
 def squirrels_map(request):
-    sightings = Sightings.object.all()[:100]
+    sightings = Sighting.objects.all()[:100]
 
     return render(request, 'sightings/map.html')
 
@@ -64,14 +64,15 @@ def edit_sighting(request, unique_id):
     #return render(request, 'squirreltracker/edit.html', {'form':form,})
 
 def sightingsStats(request):
-    agelist = Sighting.objects.values('age').annotate(count=Count('age')).orber_by()
-    colorlist = Sighting.objects.values('color').annotate(count=Count('color')).order_by()
-    datelist = Sighting.objects.values('date').annotate(count=Count('date')).order_by()
-    runninglist = Sighting.objects.values('running').annotate(count=Count('running')).order_by()
-    chasinglist = Sighting.objects.values('chasing').annotate(count=Count('chasing')).order_by()
+    agelist = Sighting.objects.values('age').annotate(count=Count('age'))
+    colorlist = Sighting.objects.values('color').annotate(count=Count('color'))
+    datelist = Sighting.objects.values('date').annotate(count=Count('date'))
+    runninglist = Sighting.objects.values('running').annotate(count=Count('running'))
+    chasinglist = Sighting.objects.values('chasing').annotate(count=Count('chasing'))
     context={
             'agelist':agelist,
-            'shiftlist':shiftlist,
+            'colorlost':colorlist,
+            'datelist':datelist,
             'runninglist':runninglist,
             'chasinglist':chasinglist,
             }
