@@ -71,7 +71,7 @@ def sightingsStats(request):
     chasinglist = Sighting.objects.values('chasing').annotate(count=Count('chasing'))
     context={
             'agelist':agelist,
-            'colorlost':colorlist,
+            'colorlist':colorlist,
             'datelist':datelist,
             'runninglist':runninglist,
             'chasinglist':chasinglist,
