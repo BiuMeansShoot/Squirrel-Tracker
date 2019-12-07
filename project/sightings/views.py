@@ -4,6 +4,11 @@ from django.db.models import Count
 from .models import Sighting
 from .forms import SightingForm
 
+def squirrels_map(request):
+    sightings = Sightings.object.all()[:100]
+
+    return render(request, 'sightings/map.html')
+
 def all_sightings(request):
     if request.method == "GET":
 
