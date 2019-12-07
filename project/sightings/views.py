@@ -30,18 +30,33 @@ def add_sighting(request):
     return render(request, 'sightings/add.html', context)
 
 def edit_sighting(request, unique_id):
-    sighting = get_object_or_404(Sighting, pk.unique_id)
-    form = SightingForm(request,POST or None, instance=sighting)
-    if 'Update' in repost.POST:
+    sighting = Sighting.objects.get(id=unique_id)
+    if request.method == 'POST':
+        form = SightingForm(request.POST, instance=sighting)
         if form.is_valid():
             form.save()
-            return redirect('all_sightings')
-    elif 'Delete' in request.POST:
-        sighting.delete()
-        return redirect('all_sightings')
-    elif 'Cancel' in request.POST:
-        return redirect('all_sightings')
-    return render(request, 'squirreltracker/edit.html', {'form':form,})
+            return redirect(f'/sightings/{unique_id}')
+    else:
+        form = SightingForm(instance=sighting)
+
+    context = {
+            'form': form,
+    }
+
+    return render(request, 'sightings/edit.html', context)
+
+    #sighting = get_object_or_404(Sighting, pk.unique_id)
+    #form = SightingForm(request,POST or None, instance=sighting)
+    # if 'Update' in repost.POST:
+    #    if form.is_valid():
+    #        form.save()
+    #        return redirect('all_sightings')
+    #elif 'Delete' in request.POST:
+    #    sighting.delete()
+    #    return redirect('all_sightings')
+    #elif 'Cancel' in request.POST:
+    #    return redirect('all_sightings')
+    #return render(request, 'squirreltracker/edit.html', {'form':form,})
 
 def sightingsStats(request):
     agelist = Sighting.objects.values('age').annotate(count=Count('age')).orber_by()
