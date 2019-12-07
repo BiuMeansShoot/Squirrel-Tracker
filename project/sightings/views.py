@@ -5,9 +5,9 @@ from .models import Sighting
 from .forms import SightingForm
 
 def squirrels_map(request):
-    sightings = Sighting.objects.all()[:100]
-
-    return render(request, 'sightings/map.html')
+    sightings = Sightings.object.all()[:100]
+    context = {'sightings': sightings,}
+    return render(request, 'sightings/map.html',context)
 
 def all_sightings(request):
     if request.method == "GET":
