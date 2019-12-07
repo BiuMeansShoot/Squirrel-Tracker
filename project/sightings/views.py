@@ -5,11 +5,13 @@ from .models import Sighting
 from .forms import SightingForm
 
 def all_sightings(request):
-    sightings = Sighting.objects.all()
-    context = {
-            'sightings': sightings,
-    }
-    return render(request,'sightings/all.html', context)
+    if request.method == "GET":
+
+        sightings = Sighting.objects.all()
+        context = {
+                'sightings': sightings,
+        }
+        return render(request,'sightings/all.html', context)
 
 
 def add_sighting(request):
@@ -17,7 +19,7 @@ def add_sighting(request):
         form = SightingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(f'/sightings/list/')
+            return redirect(f'/sightings/')
     else:
         form = SightingForm()
 
