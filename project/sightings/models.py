@@ -42,6 +42,21 @@ class Sighting(models.Model):
         blank =True,
 
     )
+   
+    PM = 'PM'
+    AM = 'AM'
+
+    SHIFT_CHOICES = (
+            (PM, 'PM'),
+            (AM, 'AM'),
+    )
+
+    shift = models.CharField(
+        help_text=_('Shift'),
+        max_length=10,
+        choices=SHIFT_CHOICES,
+        blank = True,
+    )
 
     latitude = models.DecimalField(
         help_text=_('Latitude'),
