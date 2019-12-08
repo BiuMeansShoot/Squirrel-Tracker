@@ -19,6 +19,7 @@ class Command(BaseCommand):
             headers = next(data)
             for data_object in data:
                 id =  data_object[2]
+                shift = data_object[4]
                 age = data_object[7]
                 color = data_object[8]
                 latitude = data_object[1]
