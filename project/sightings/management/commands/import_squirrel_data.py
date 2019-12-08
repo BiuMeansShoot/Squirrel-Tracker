@@ -58,6 +58,7 @@ class Command(BaseCommand):
                     sighting, created = Sighting.objects.get_or_create(
                         id=id,
                         age=age,
+                        shift=shift
                         color=color,
                         latitude=latitude,
                         longitude=longitude,
