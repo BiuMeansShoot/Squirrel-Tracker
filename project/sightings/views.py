@@ -66,13 +66,13 @@ def edit_sighting(request, unique_id):
 def sightingsStats(request):
     agelist = Sighting.objects.values('age').annotate(count=Count('age'))
     colorlist = Sighting.objects.values('color').annotate(count=Count('color'))
-    shiftlist = Sighting.objects.values('shift').annotate(count=Count('shift'))
+    eatinglist = Sighting.objects.values('eating').annotate(count=Count('eating'))
     runninglist = Sighting.objects.values('running').annotate(count=Count('running'))
     chasinglist = Sighting.objects.values('chasing').annotate(count=Count('chasing'))
     context={
             'agelist':agelist,
             'colorlist':colorlist,
-            'shiftlist':shiftlist,
+            'eatinglist':eatinglist,
             'runninglist':runninglist,
             'chasinglist':chasinglist,
             }
