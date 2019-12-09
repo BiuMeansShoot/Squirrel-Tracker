@@ -30,7 +30,7 @@ def all_sightings(request):
 
 def add_sighting(request):
     """This func is to link the page to add a new sighting"""
-    if request.method == 'POST' or request.method == 'GET':
+    if request.method == 'POST':
         form = SightingForm(request.POST)
         if form.is_valid():
             form.save()
@@ -54,7 +54,7 @@ def edit_sighting(request, unique_id):
     :return:
     """
     sighting = Sighting.objects.get(id=unique_id)
-    if request.method == 'POST' or request.method == 'GET':
+    if request.method == 'POST':
         form = SightingForm(request.POST, instance=sighting)
         if form.is_valid():
             form.save()
@@ -84,6 +84,4 @@ def sightingsStats(request):
         'chasinglist': chasinglist,
     }
     return render(request, 'sightings/stats.html', context)
-
-
 
