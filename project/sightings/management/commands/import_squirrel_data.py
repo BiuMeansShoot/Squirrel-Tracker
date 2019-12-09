@@ -1,30 +1,34 @@
 from django.core.management.base import BaseCommand, CommandError
-from sightings.models import Sighting #as "something" needed?
+from sightings.models import Sighting
+from django.conf import settings
+
 import os
 import csv
-from django.conf import settings
-#from data_import.settings import BASE_DIR
 import datetime as dt
 
+
 class Command(BaseCommand):
+    """
+    This function allow user to import the csv file into the sqlite table
+    and then show all information on the website
+    """
     help = 'Import csv data into database'
 
     def add_arguments(self, parser):
-        parser.add_argument('file_path', help ='file path of csv data')
-
+        parser.add_argument('file_path', help='file path of csv data')
 
     def import_data_from_csv(self, filename):
         with open(filename, 'r') as csv_file:
             data = csv.reader(csv_file, delimiter=',')
             headers = next(data)
             for data_object in data:
-                id =  data_object[2]
+                id = data_object[2]
                 shift = data_object[4]
                 age = data_object[7]
                 color = data_object[8]
                 latitude = data_object[1]
                 longitude = data_object[0]
-                date = dt.datetime.strptime(data_object[5].strip(),'%m%d%Y').date()
+                date = dt.datetime.strptime(data_object[5].strip(), '%m%d%Y').date()
                 location = data_object[12]
                 specific_location = data_object[14]
                 pre_running = data_object[15]
@@ -32,7 +36,7 @@ class Command(BaseCommand):
                 pre_chasing = data_object[16]
                 chasing = True if "true" in pre_chasing.lower() else False
                 pre_climbing = data_object[17]
-                climbing  = True if "true" in pre_climbing.lower() else False
+                climbing = True if "true" in pre_climbing.lower() else False
                 pre_eating = data_object[18]
                 eating = True if "true" in pre_eating.lower() else False
                 pre_foraging = data_object[19]
@@ -43,13 +47,13 @@ class Command(BaseCommand):
                 pre_quaas = data_object[22]
                 quaas = True if "true" in pre_quaas.lower() else False
                 pre_moans = data_object[23]
-                moans  = True if "true" in pre_moans.lower() else False
+                moans = True if "true" in pre_moans.lower() else False
                 pre_tail_flags = data_object[24]
                 tail_flags = True if "true" in pre_tail_flags.lower() else False
                 pre_tail_twitches = data_object[25]
-                tail_twitches  = True if "true" in pre_tail_twitches.lower() else False
+                tail_twitches = True if "true" in pre_tail_twitches.lower() else False
                 pre_approaches = data_object[26]
-                approaches  = True if "true" in pre_approaches.lower() else False
+                approaches = True if "true" in pre_approaches.lower() else False
                 pre_indifferent = data_object[27]
                 indifferent = True if "true" in pre_indifferent.lower() else False
                 pre_runs_from = data_object[28]

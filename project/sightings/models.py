@@ -1,9 +1,12 @@
 from django.db import models
-
 from django.utils.translation import gettext as _
 
-class Sighting(models.Model):
 
+class Sighting(models.Model):
+    """
+    This function is to modified the types of input values,
+    e.g the names, the fields, etc
+    """
     id = models.CharField(
         help_text=_('Squirrel ID'),
         max_length=255,
@@ -22,7 +25,7 @@ class Sighting(models.Model):
         help_text=_('Squirel Age'),
         max_length=20,
         choices=AGE_CHOICES,
-        blank = True,
+        blank=True,
     )
 
     GRAY = 'Gray'
@@ -39,7 +42,7 @@ class Sighting(models.Model):
         help_text=_('Squirrel Fur Color'),
         max_length=20,
         choices=COLOR_CHOICES,
-        blank =True,
+        blank=True,
 
     )
    
@@ -55,7 +58,7 @@ class Sighting(models.Model):
         help_text=_('Shift'),
         max_length=10,
         choices=SHIFT_CHOICES,
-        blank = True,
+        blank=True,
     )
 
     latitude = models.DecimalField(
@@ -86,7 +89,7 @@ class Sighting(models.Model):
         help_text=_('Location'),
         max_length=20,
         choices=LOCATION_CHOICES,
-        blank = True,
+        blank=True,
     )
 
     specific_location = models.CharField(
@@ -168,4 +171,5 @@ class Sighting(models.Model):
 
     def __str__(self):
         return self.id
+
 
